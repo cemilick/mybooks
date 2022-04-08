@@ -37,7 +37,7 @@ export default function Index({navigation}) {
           : dispatch(getConnection());
       });
     } catch (err) {
-      console.log(err);
+      Alert.alert(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -49,12 +49,12 @@ export default function Index({navigation}) {
         backgroundColor: colors.primaryDark,
         width: wp('100%'),
         height: hp('100%'),
-        padding: wp(7),
+        padding: wp(5),
       }}>
       <View
         style={{
-          marginTop: -wp(7),
-          marginHorizontal: -wp(7),
+          marginTop: -wp(5),
+          marginHorizontal: -wp(5),
           backgroundColor: colors.primary,
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -64,7 +64,7 @@ export default function Index({navigation}) {
         }}>
         <Image
           source={logo}
-          style={{width: wp(35), height: wp(12), marginLeft: -wp(7)}}
+          style={{width: wp(35), height: wp(12), marginLeft: -wp(5)}}
           resizeMode="cover"
         />
         <TouchableOpacity

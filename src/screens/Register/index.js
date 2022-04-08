@@ -19,6 +19,7 @@ import logo from '../../assets/images/logo.png';
 import Comfortaa from '../../components/Comfortaa';
 import {getConnection} from '../../components/NoConnection';
 import {useDispatch} from 'react-redux';
+import {Registration} from './redux/action';
 
 export default function Index({navigation}) {
   const dispatch = useDispatch();
@@ -80,7 +81,7 @@ export default function Index({navigation}) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              dispatch(Registration(email, password, name));
+              dispatch(Registration(email, password, name, navigation));
             }}>
             <Comfortaa>Register</Comfortaa>
           </TouchableOpacity>

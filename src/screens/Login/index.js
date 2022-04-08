@@ -19,7 +19,7 @@ import logo from '../../assets/images/logo.png';
 import Comfortaa from '../../components/Comfortaa';
 import {getConnection} from '../../components/NoConnection';
 import {useDispatch, useSelector} from 'react-redux';
-
+import {login} from './redux/action';
 LogBox.ignoreAllLogs();
 
 export default function Index({navigation}) {
@@ -73,7 +73,7 @@ export default function Index({navigation}) {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => dispatch(login(email, password))}>
+            onPress={() => dispatch(login(email, password, navigation))}>
             <Comfortaa>Login</Comfortaa>
           </TouchableOpacity>
         </View>

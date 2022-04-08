@@ -49,22 +49,22 @@ export default function Index({navigation}) {
         backgroundColor: colors.primaryDark,
         width: wp('100%'),
         height: hp('100%'),
-        padding: 15,
+        padding: wp(7),
       }}>
       <View
         style={{
-          marginTop: -15,
-          marginHorizontal: -15,
+          marginTop: -wp(7),
+          marginHorizontal: -wp(7),
           backgroundColor: colors.primary,
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingHorizontal: 15,
-          paddingVertical: 10,
+          paddingHorizontal: wp(7),
+          paddingVertical: wp(3),
         }}>
         <Image
           source={logo}
-          style={{width: 150, height: 50, marginLeft: -15}}
+          style={{width: wp(35), height: wp(12), marginLeft: -wp(7)}}
           resizeMode="cover"
         />
         <TouchableOpacity
@@ -79,8 +79,8 @@ export default function Index({navigation}) {
           }}
           style={{
             backgroundColor: colors.primaryDark,
-            padding: 8,
-            borderRadius: 8,
+            padding: wp(2),
+            borderRadius: wp(2),
           }}>
           <Comfortaa>Logout</Comfortaa>
         </TouchableOpacity>

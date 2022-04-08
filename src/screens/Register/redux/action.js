@@ -1,11 +1,10 @@
 import axios from 'axios';
 import {Alert} from 'react-native';
+import {BASE_URL} from '../../../helpers/apiAccess';
 import {setLoading} from '../../../store/globalAction';
-import {BASE_URL} from '../../helpers/apiAccess';
 
 export const Registration =
-  ({email, password, fullname}) =>
-  async dispatch => {
+  (email, password, fullname, navigation) => async dispatch => {
     const body = {
       email: email,
       password: password,

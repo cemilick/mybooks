@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comfortaa Testing equals with snapshot 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#FFF",
+        "fontFamily": "Comfortaa-Regular",
+        "fontSize": 14,
+        "textDecorationLine": "none",
+      },
+      undefined,
+    ]
+  }
+  testID="text component"
+>
+  cemilick
+</Text>
+`;

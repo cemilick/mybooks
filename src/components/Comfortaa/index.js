@@ -19,17 +19,7 @@ export default function Index({
   });
 
   return (
-    <Text
-      testID="text component"
-      style={[
-        {
-          color: colors.primaryLight,
-          fontFamily: `Comfortaa-${type}`,
-          fontSize: size,
-          textDecorationLine: decoration,
-        },
-        style,
-      ]}>
+    <Text testID="text component" style={[styles.text, style]}>
       {children}
     </Text>
   );

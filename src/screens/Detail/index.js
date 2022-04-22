@@ -34,7 +34,7 @@ export default function Index({navigation, route}) {
     if (detailBooks.id !== id) {
       dispatch(getDetailBooks(id, token));
     }
-  }, [dispatch]);
+  }, [dispatch, detailBooks.id, id, token]);
 
   return (
     <View

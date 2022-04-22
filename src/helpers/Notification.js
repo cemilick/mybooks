@@ -1,5 +1,5 @@
 import PushNotification from 'react-native-push-notification';
-
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 class Notification {
   configure = () => {
     PushNotification.configure({
@@ -50,7 +50,6 @@ class Notification {
        *
        */
       requestPermissions: true,
-      requestPermissions: Platform.OS === 'ios',
     });
   };
   createChannel = channel => {

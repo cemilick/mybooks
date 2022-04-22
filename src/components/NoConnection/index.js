@@ -1,5 +1,5 @@
-import {View, Text, Modal, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -9,7 +9,7 @@ import Comfortaa from '../Comfortaa';
 import {colors} from '../../res/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSelector, useDispatch} from 'react-redux';
-import {setConnected, setLoading} from '../../store/globalAction';
+import {setConnected} from '../../store/globalAction';
 
 export default function Index() {
   const {connected} = useSelector(state => state.global);
@@ -17,41 +17,20 @@ export default function Index() {
 
   useEffect(() => {
     dispatch(getConnection());
-  }, []);
+  }, [dispatch]);
 
   if (!connected) {
     return (
-      <View
-        style={{
-          height: hp(100),
-          width: wp(100),
-          backgroundColor: colors.primaryLight,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 1,
-        }}>
+      <View style={styles.container}>
         <MaterialIcons name="wifi-off" color={colors.primary} size={wp(30)} />
-        <Comfortaa style={{color: colors.primary}} type="Bold" size={20}>
+        <Comfortaa style={styles.title} type="Bold" size={20}>
           No Connection
         </Comfortaa>
-        <Comfortaa
-          style={{color: colors.primary, width: wp(70), textAlign: 'center'}}
-          size={16}>
+        <Comfortaa style={styles.text} size={16}>
           Please connect to a WiFi or Data Seluler then click button below.
         </Comfortaa>
         <TouchableOpacity onPress={() => dispatch(getConnection())}>
-          <Comfortaa
-            style={{
-              borderRadius: 5,
-              padding: 10,
-              backgroundColor: colors.primary,
-              width: wp(30),
-              textAlign: 'center',
-              marginTop: 30,
-            }}>
-            Refresh
-          </Comfortaa>
+          <Comfortaa style={styles.button}>Refresh</Comfortaa>
         </TouchableOpacity>
       </View>
     );
@@ -59,6 +38,34 @@ export default function Index() {
     return <></>;
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: hp(100),
+    width: wp(100),
+    backgroundColor: colors.primaryLight,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  title: {
+    color: colors.primary,
+  },
+  text: {
+    color: colors.primary,
+    width: wp(70),
+    textAlign: 'center',
+  },
+  button: {
+    borderRadius: 5,
+    padding: 10,
+    backgroundColor: colors.primary,
+    width: wp(30),
+    textAlign: 'center',
+    marginTop: 30,
+  },
+});
 
 export const getConnection = () => async dispatch => {
   try {

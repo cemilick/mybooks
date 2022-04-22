@@ -33,7 +33,7 @@ export default function Index({navigation}) {
     if (token) {
       navigation.navigate('Home');
     }
-  }, [dispatch]);
+  }, [dispatch, token, navigation]);
 
   return (
     <ScrollView style={{backgroundColor: colors.primaryDark}}>

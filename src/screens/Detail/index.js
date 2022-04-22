@@ -5,6 +5,7 @@ import {
   Share,
   Alert,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getDetailBooks} from './redux/action';
@@ -21,6 +22,7 @@ import toIDR from '../../helpers/toIDR';
 import {notification} from '../../helpers/Notification';
 import Loading from '../../components/Loading';
 import {moderateScale as ms} from 'react-native-size-matters';
+import Pdf from 'react-native-pdf';
 
 export default function Index({navigation, route}) {
   const dispatch = useDispatch();
@@ -44,8 +46,21 @@ export default function Index({navigation, route}) {
     }
   }, [dispatch, detailBooks.id, id, token]);
 
+  const [pdf, setPdf] = useState(false);
+
   return (
     <View style={styles.container}>
+      <View style={pdf ? styles.pdfContainer : styles.pdfContainerActive}>
+        <TouchableOpacity onPress={() => setPdf(false)}>
+          <Comfortaa>Tutup Buku</Comfortaa>
+        </TouchableOpacity>
+        <Pdf
+          source={{
+            uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf',
+          }}
+          style={pdf ? styles.pdfActive : styles.pdf}
+        />
+      </View>
       <Loading transparent={false} />
       <View style={styles.content}>
         <TouchableOpacity
@@ -114,71 +129,92 @@ export default function Index({navigation, route}) {
           <Comfortaa>Author : {detailBooks.author}</Comfortaa>
           <Comfortaa>Publisher : {detailBooks.publisher}</Comfortaa>
         </View>
-        <View style={styles.card}>
-          <View style={styles.center}>
-            <Comfortaa type="Bold" style={styles.cardText}>
-              Rating
+      </View>
+      <View style={styles.card}>
+        <View style={styles.center}>
+          <Comfortaa type="Bold" style={styles.cardText}>
+            Rating
+          </Comfortaa>
+          <View style={styles.ratingContainer}>
+            <Comfortaa style={styles.ratingValue}>
+              {detailBooks.average_rating}
             </Comfortaa>
-            <View style={styles.ratingContainer}>
-              <Comfortaa style={styles.ratingValue}>
-                {detailBooks.average_rating}
-              </Comfortaa>
 
-              <FontAwesome5
-                name="star"
-                size={ms(10)}
-                color={colors.primaryDark}
-                solid
-              />
-            </View>
+            <FontAwesome5
+              name="star"
+              size={ms(10)}
+              color={colors.primaryDark}
+              solid
+            />
           </View>
-          <View style={styles.center}>
-            <Comfortaa type="Bold" style={styles.cardText}>
-              Total Sale
-            </Comfortaa>
-            <Comfortaa style={styles.cardText}>
-              {detailBooks.total_sale}
-            </Comfortaa>
-          </View>
-          <View>
-            <TouchableOpacity
-              onPress={() =>
-                Alert.alert(
-                  'Coming Soon',
-                  'This features will be added in next update',
-                )
-              }
-              style={styles.price}>
-              <Comfortaa>
-                Buy Rp.{' '}
-                <Comfortaa style={styles.priceValue}>
-                  {detailBooks.price ? toIDR(detailBooks.price) : ''}
-                  ,-
-                </Comfortaa>
-              </Comfortaa>
-            </TouchableOpacity>
-          </View>
+        </View>
+        <View style={styles.center}>
+          <Comfortaa type="Bold" style={styles.cardText}>
+            Total Sale
+          </Comfortaa>
+          <Comfortaa style={styles.cardText}>
+            {detailBooks.total_sale}
+          </Comfortaa>
         </View>
         <View>
-          <Comfortaa type="Bold" size={ms(20)} style={styles.overview}>
-            Overview
-          </Comfortaa>
-          <Comfortaa style={styles.overviewContainer}>
-            {detailBooks.synopsis
-              ? detailBooks.synopsis.split(' ').map(word => {
-                  return (
-                    <Comfortaa style={styles.overviewText}>{word} </Comfortaa>
-                  );
-                })
-              : ''}
-          </Comfortaa>
+          <TouchableOpacity onPress={() => setPdf(true)} style={styles.price}>
+            <Comfortaa>
+              Buy Rp.{' '}
+              <Comfortaa style={styles.priceValue}>
+                {detailBooks.price ? toIDR(detailBooks.price) : ''}
+                ,-
+              </Comfortaa>
+            </Comfortaa>
+          </TouchableOpacity>
         </View>
+      </View>
+      <View>
+        <Comfortaa type="Bold" size={ms(20)} style={styles.overview}>
+          Overview
+        </Comfortaa>
+        <Comfortaa style={styles.overviewContainer}>
+          {detailBooks.synopsis
+            ? detailBooks.synopsis.split(' ').map(word => {
+                return (
+                  <Comfortaa style={styles.overviewText}>{word} </Comfortaa>
+                );
+              })
+            : ''}
+        </Comfortaa>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  pdfContainer: {
+    display: 'none',
+    position: 'absolute',
+    top: 0,
+    marginTop: -hp('50%'),
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pdfContainerActive: {
+    display: 'flex',
+    position: 'absolute',
+  },
+  pdf: {
+    width: wp('100%'),
+    height: ms(600),
+    display: 'none',
+    marginLeft: ms(-15),
+    marginTop: ms(10),
+  },
+  pdfActive: {
+    width: wp('100%'),
+    height: ms(600),
+    display: 'flex',
+    marginLeft: ms(-15),
+    marginTop: ms(10),
+  },
   container: {
     backgroundColor: colors.primaryDark,
     width: wp('100%'),
@@ -207,11 +243,9 @@ const styles = StyleSheet.create({
     marginBottom: ms(5),
   },
   image: {
-    borderRadius: ms(40),
-    width: ms(40),
+    width: ms(120),
     height: ms(40),
     padding: ms(10),
-    backgroundColor: colors.primaryDark,
   },
   buttonContainer: {flexDirection: 'row'},
   loved: {

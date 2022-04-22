@@ -10,6 +10,7 @@ import {colors} from '../../res/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSelector, useDispatch} from 'react-redux';
 import {setConnected} from '../../store/globalAction';
+import {moderateScale as ms} from 'react-native-size-matters';
 
 export default function Index() {
   const {connected} = useSelector(state => state.global);
@@ -23,10 +24,10 @@ export default function Index() {
     return (
       <View style={styles.container}>
         <MaterialIcons name="wifi-off" color={colors.primary} size={wp(30)} />
-        <Comfortaa style={styles.title} type="Bold" size={20}>
+        <Comfortaa style={styles.title} type="Bold" size={ms(20)}>
           No Connection
         </Comfortaa>
-        <Comfortaa style={styles.text} size={16}>
+        <Comfortaa style={styles.text} size={ms(16)}>
           Please connect to a WiFi or Data Seluler then click button below.
         </Comfortaa>
         <TouchableOpacity onPress={() => dispatch(getConnection())}>
@@ -38,7 +39,17 @@ export default function Index() {
     return <></>;
   }
 }
-
+export const getConnection = () => async dispatch => {
+  try {
+    await Netinfo.fetch().then(state => {
+      console.log(state.isConnected);
+      dispatch(setConnected(state.isConnected));
+    });
+  } catch (err) {
+    console.log(err);
+  } finally {
+  }
+};
 const styles = StyleSheet.create({
   container: {
     height: hp(100),
@@ -58,23 +69,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    borderRadius: 5,
-    padding: 10,
+    borderRadius: ms(5),
+    padding: ms(10),
     backgroundColor: colors.primary,
     width: wp(30),
     textAlign: 'center',
-    marginTop: 30,
+    marginTop: ms(30),
   },
 });
-
-export const getConnection = () => async dispatch => {
-  try {
-    await Netinfo.fetch().then(state => {
-      console.log(state.isConnected);
-      dispatch(setConnected(state.isConnected));
-    });
-  } catch (err) {
-    console.log(err);
-  } finally {
-  }
-};

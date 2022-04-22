@@ -20,6 +20,7 @@ import logo from '../../assets/images/logo2.png';
 import toIDR from '../../helpers/toIDR';
 import {notification} from '../../helpers/Notification';
 import Loading from '../../components/Loading';
+import {moderateScale as ms} from 'react-native-size-matters';
 
 export default function Index({navigation, route}) {
   const dispatch = useDispatch();
@@ -79,20 +80,24 @@ export default function Index({navigation, route}) {
             {loved ? (
               <FontAwesome5
                 name="heart"
-                size={20}
+                size={ms(20)}
                 color={colors.primaryLight}
                 solid
               />
             ) : (
               <FontAwesome5
                 name="heart"
-                size={20}
+                size={ms(20)}
                 color={colors.primaryLight}
               />
             )}
           </TouchableOpacity>
           <TouchableOpacity onPress={shareBook} style={styles.shared}>
-            <FontAwesome5 name="share" size={20} color={colors.primaryLight} />
+            <FontAwesome5
+              name="share"
+              size={ms(20)}
+              color={colors.primaryLight}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -103,7 +108,7 @@ export default function Index({navigation, route}) {
           resizeMode="cover"
         />
         <View>
-          <Comfortaa type="Bold" size={20} style={styles.title}>
+          <Comfortaa type="Bold" size={ms(20)} style={styles.title}>
             {detailBooks.title}
           </Comfortaa>
           <Comfortaa>Author : {detailBooks.author}</Comfortaa>
@@ -121,7 +126,7 @@ export default function Index({navigation, route}) {
 
               <FontAwesome5
                 name="star"
-                size={10}
+                size={ms(10)}
                 color={colors.primaryDark}
                 solid
               />
@@ -155,7 +160,7 @@ export default function Index({navigation, route}) {
           </View>
         </View>
         <View>
-          <Comfortaa type="Bold" size={20} style={styles.overview}>
+          <Comfortaa type="Bold" size={ms(20)} style={styles.overview}>
             Overview
           </Comfortaa>
           <Comfortaa style={styles.overviewContainer}>
@@ -178,71 +183,71 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryDark,
     width: wp('100%'),
     height: hp('100%'),
-    padding: 15,
+    padding: ms(15),
   },
   content: {
-    marginTop: -15,
-    marginHorizontal: -15,
+    marginTop: ms(-15),
+    marginHorizontal: ms(-15),
     backgroundColor: colors.primary,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingHorizontal: ms(15),
+    paddingVertical: ms(10),
   },
   button: {
-    borderRadius: 40,
-    width: 40,
-    height: 40,
-    padding: 10,
+    borderRadius: ms(40),
+    width: ms(40),
+    height: ms(40),
+    padding: ms(10),
     backgroundColor: colors.primaryDark,
   },
   title: {
     width: wp('60%'),
-    marginBottom: 5,
+    marginBottom: ms(5),
   },
   image: {
-    borderRadius: 40,
-    width: 40,
-    height: 40,
-    padding: 10,
+    borderRadius: ms(40),
+    width: ms(40),
+    height: ms(40),
+    padding: ms(10),
     backgroundColor: colors.primaryDark,
   },
   buttonContainer: {flexDirection: 'row'},
   loved: {
-    borderRadius: 40,
-    width: 40,
-    height: 40,
-    padding: 10,
+    borderRadius: ms(40),
+    width: ms(40),
+    height: ms(40),
+    padding: ms(10),
     backgroundColor: colors.primaryDark,
-    marginRight: 10,
+    marginRight: ms(10),
   },
   shared: {
-    borderRadius: 40,
-    width: 40,
-    height: 40,
-    padding: 10,
+    borderRadius: ms(40),
+    width: ms(40),
+    height: ms(40),
+    padding: ms(10),
     backgroundColor: colors.primaryDark,
   },
   header: {
     flexDirection: 'row',
-    padding: 10,
-    marginTop: 20,
+    padding: ms(10),
+    marginTop: ms(20),
   },
   cover: {
-    width: 100,
-    height: 150,
-    borderRadius: 3,
-    marginRight: 10,
+    width: ms(100),
+    height: ms(150),
+    borderRadius: ms(3),
+    marginRight: ms(10),
   },
   card: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: ms(20),
     backgroundColor: colors.primary,
-    padding: 20,
-    borderRadius: 5,
+    padding: ms(20),
+    borderRadius: ms(5),
   },
   center: {alignItems: 'center'},
   cardText: {color: colors.primaryDark},
@@ -253,19 +258,19 @@ const styles = StyleSheet.create({
   },
   ratingValue: {
     color: colors.primaryDark,
-    marginTop: -2,
-    marginRight: 3,
+    marginTop: ms(-2),
+    marginRight: ms(3),
   },
   price: {
     backgroundColor: colors.primaryDark,
-    padding: 7,
-    borderRadius: 5,
+    padding: ms(7),
+    borderRadius: ms(5),
   },
-  priceValue: {letterSpacing: 1},
+  priceValue: {letterSpacing: ms(1)},
   overview: {
-    marginBottom: 10,
-    marginTop: 15,
+    marginBottom: ms(10),
+    marginTop: ms(15),
   },
   overviewContainer: {textAlign: 'justify'},
-  overviewText: {lineHeight: 25},
+  overviewText: {lineHeight: ms(25)},
 });

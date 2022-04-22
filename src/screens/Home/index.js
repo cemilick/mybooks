@@ -21,6 +21,7 @@ import {getConnection} from '../../components/NoConnection';
 import Netinfo from '@react-native-community/netinfo';
 import {setConnected, setLoading} from '../../store/globalAction';
 import {setToken} from '../Login/redux/action';
+import {moderateScale as ms} from 'react-native-size-matters';
 
 export default function Index({navigation}) {
   const {books} = useSelector(state => state.home);
@@ -78,25 +79,25 @@ export default function Index({navigation}) {
       borderRadius: wp(2),
     },
     hello: {
-      marginTop: 10,
-      marginBottom: 20,
+      marginTop: ms(10),
+      marginBottom: ms(20),
     },
-    recommended: {marginBottom: 10},
+    recommended: {marginBottom: ms(10)},
     popular: {
-      marginBottom: 10,
+      marginBottom: ms(10),
       marginTop: -hp('20%'),
     },
     flex: {flex: 1},
     image: {
       width: wp('28%'),
       height: hp('20%'),
-      marginRight: 15,
-      borderRadius: 5,
+      marginRight: ms(15),
+      borderRadius: ms(5),
     },
     title: {width: wp('30%')},
     title2: {
       width: wp('30%'),
-      marginBottom: 15,
+      marginBottom: ms(15),
     },
   });
 
@@ -118,10 +119,10 @@ export default function Index({navigation}) {
           <Comfortaa>Logout</Comfortaa>
         </TouchableOpacity>
       </View>
-      <Comfortaa size={16} style={styles.hello}>
+      <Comfortaa size={ms(16)} style={styles.hello}>
         Hello {name}, Welcome Back!
       </Comfortaa>
-      <Comfortaa type="Bold" size={20} style={styles.recommended}>
+      <Comfortaa type="Bold" size={ms(20)} style={styles.recommended}>
         Recommended
       </Comfortaa>
       <FlatList
@@ -142,7 +143,7 @@ export default function Index({navigation}) {
           );
         }}
       />
-      <Comfortaa type="Bold" size={20} style={styles.popular}>
+      <Comfortaa type="Bold" size={ms(20)} style={styles.popular}>
         Popular
       </Comfortaa>
       <FlatList

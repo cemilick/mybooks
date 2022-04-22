@@ -18,6 +18,7 @@ import Comfortaa from '../../components/Comfortaa';
 import {getConnection} from '../../components/NoConnection';
 import {useDispatch} from 'react-redux';
 import {Registration} from './redux/action';
+import {moderateScale as ms} from 'react-native-size-matters';
 
 export default function Index({navigation}) {
   const dispatch = useDispatch();
@@ -47,9 +48,9 @@ export default function Index({navigation}) {
             iconClass={FontAwesome5}
             iconName={'user'}
             iconColor={colors.primary}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
+            iconSize={ms(20)}
+            iconWidth={ms(40)}
+            inputPadding={ms(16)}
             onChangeText={text => setName(text)}
           />
           <Fumi
@@ -58,9 +59,9 @@ export default function Index({navigation}) {
             iconClass={FontAwesome5}
             iconName={'envelope'}
             iconColor={colors.primary}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
+            iconSize={ms(20)}
+            iconWidth={ms(40)}
+            inputPadding={ms(16)}
             onChangeText={text => setEmail(text)}
           />
           <Fumi
@@ -69,9 +70,9 @@ export default function Index({navigation}) {
             iconClass={FontAwesome5}
             iconName={'lock'}
             iconColor={colors.primary}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
+            iconSize={ms(20)}
+            iconWidth={ms(40)}
+            inputPadding={ms(16)}
             secureTextEntry={true}
             onChangeText={text => setPassword(text)}
           />
@@ -112,22 +113,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   form: {
-    marginBottom: 8,
-    borderRadius: 5,
+    marginBottom: ms(8),
+    borderRadius: ms(5),
     width: wp(80),
   },
   formContainer: {
     backgroundColor: colors.primary,
     width: wp(90),
     padding: wp(5),
-    borderRadius: 10,
+    borderRadius: ms(10),
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: ms(200),
+    height: ms(200),
   },
   logoContainer: {
     width: wp(100),
@@ -137,21 +138,21 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.primaryDark,
-    padding: 10,
+    padding: ms(10),
     alignItems: 'center',
     width: wp(50),
-    borderRadius: 5,
-    marginTop: 8,
+    borderRadius: ms(5),
+    marginTop: ms(8),
   },
   footer: {
     alignItems: 'center',
-    marginTop: 25,
+    marginTop: ms(25),
   },
   circle: {
     backgroundColor: colors.primary,
-    width: 20,
-    height: 20,
-    borderRadius: 100,
+    width: ms(20),
+    height: ms(20),
+    borderRadius: ms(100),
   },
   circleTopContainer: {
     flexDirection: 'column',

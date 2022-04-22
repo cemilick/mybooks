@@ -23,7 +23,7 @@ export default function Index({navigation}) {
   useEffect(() => {
     dispatch(getConnection());
     dispatch(getRecommendedBooks());
-  }, []);
+  }, [dispatch]);
 
   console.log(books);
 

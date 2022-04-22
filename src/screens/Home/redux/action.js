@@ -18,7 +18,7 @@ export const getRecommendedBooks = () => async dispatch => {
     if (result.status === 200) {
       return dispatch(setRecommendedBooks(result.data.results));
     } else {
-      Alert.alert(`Failed`, result.data.message);
+      Alert.alert('Failed', result.data.message);
     }
   } catch (err) {
     console.log(err);

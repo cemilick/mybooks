@@ -31,8 +31,10 @@ export default function Index({navigation, route}) {
     }
   };
   useEffect(() => {
-    if (detailBooks.id !== id) dispatch(getDetailBooks(id, token));
-  }, []);
+    if (detailBooks.id !== id) {
+      dispatch(getDetailBooks(id, token));
+    }
+  }, [dispatch]);
 
   return (
     <View

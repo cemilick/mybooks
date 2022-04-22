@@ -29,14 +29,14 @@ export default function Index({navigation}) {
 
   useEffect(() => {
     dispatch(getConnection());
-  }, []);
+  }, [dispatch]);
 
   return (
     <ScrollView style={{backgroundColor: colors.primaryDark}}>
       <View style={styles.circleTopContainer}>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+        <View style={styles.circle} />
       </View>
       <View style={styles.allContainer}>
         <View style={styles.logoContainer}>
@@ -97,9 +97,9 @@ export default function Index({navigation}) {
       </View>
 
       <View style={styles.circleBottomContainer}>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+        <View style={styles.circle} />
       </View>
     </ScrollView>
   );

@@ -30,15 +30,17 @@ export default function Index({navigation}) {
 
   useEffect(() => {
     dispatch(getConnection());
-    if (token) navigation.navigate('Home');
-  }, []);
+    if (token) {
+      navigation.navigate('Home');
+    }
+  }, [dispatch]);
 
   return (
     <ScrollView style={{backgroundColor: colors.primaryDark}}>
       <View style={styles.circleTopContainer}>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+        <View style={styles.circle} />
       </View>
 
       <View style={styles.allContainer}>
@@ -87,9 +89,9 @@ export default function Index({navigation}) {
         </View>
       </View>
       <View style={styles.circleBottomContainer}>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
-        <View style={styles.circle}></View>
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+        <View style={styles.circle} />
       </View>
     </ScrollView>
   );

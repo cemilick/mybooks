@@ -55,7 +55,9 @@ export default function Index() {
         </TouchableOpacity>
       </View>
     );
-  } else return <></>;
+  } else {
+    return <></>;
+  }
 }
 
 export const getConnection = () => async dispatch => {

@@ -19,7 +19,7 @@ describe('Comfortaa Testing', () => {
   });
 
   it('equals with snapshot', () => {
-    const {getByTestId, toJSON} = render(<Comfortaa>cemilick</Comfortaa>);
+    const {toJSON} = render(<Comfortaa>cemilick</Comfortaa>);
     expect(toJSON()).toMatchSnapshot();
   });
 });

@@ -1,11 +1,9 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Fumi} from 'react-native-textinput-effects';

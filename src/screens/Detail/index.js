@@ -1,4 +1,11 @@
-import {View, Image, TouchableOpacity, Share, Alert} from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Share,
+  Alert,
+  StyleSheet,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getDetailBooks} from './redux/action';
 import {useDispatch, useSelector} from 'react-redux';
@@ -27,7 +34,7 @@ export default function Index({navigation, route}) {
         message: `${detailBooks.title} is very amazing! You should read this book!`,
       });
     } catch (error) {
-      alert(error.message);
+      Alert.alert(error.message);
     }
   };
   useEffect(() => {
@@ -37,33 +44,11 @@ export default function Index({navigation, route}) {
   }, [dispatch, detailBooks.id, id, token]);
 
   return (
-    <View
-      style={{
-        backgroundColor: colors.primaryDark,
-        width: wp('100%'),
-        height: hp('100%'),
-        padding: 15,
-      }}>
+    <View style={styles.container}>
       <Loading transparent={false} />
-      <View
-        style={{
-          marginTop: -15,
-          marginHorizontal: -15,
-          backgroundColor: colors.primary,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 15,
-          paddingVertical: 10,
-        }}>
+      <View style={styles.content}>
         <TouchableOpacity
-          style={{
-            borderRadius: 40,
-            width: 40,
-            height: 40,
-            padding: 10,
-            backgroundColor: colors.primaryDark,
-          }}
+          style={styles.button}
           onPress={() => navigation.navigate('Home')}>
           <FontAwesome5
             name="arrow-left"
@@ -71,12 +56,8 @@ export default function Index({navigation, route}) {
             color={colors.primaryLight}
           />
         </TouchableOpacity>
-        <Image
-          source={logo}
-          style={{width: 150, height: 50}}
-          resizeMode="cover"
-        />
-        <View style={{flexDirection: 'row'}}>
+        <Image source={logo} style={styles.image} resizeMode="cover" />
+        <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => {
               setLoved(!loved);
@@ -94,14 +75,7 @@ export default function Index({navigation, route}) {
                     `${detailBooks.title} is successfully loved right now!`,
                   );
             }}
-            style={{
-              borderRadius: 40,
-              width: 40,
-              height: 40,
-              padding: 10,
-              backgroundColor: colors.primaryDark,
-              marginRight: 10,
-            }}>
+            style={styles.loved}>
             {loved ? (
               <FontAwesome5
                 name="heart"
@@ -117,63 +91,31 @@ export default function Index({navigation, route}) {
               />
             )}
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={shareBook}
-            style={{
-              borderRadius: 40,
-              width: 40,
-              height: 40,
-              padding: 10,
-              backgroundColor: colors.primaryDark,
-            }}>
+          <TouchableOpacity onPress={shareBook} style={styles.shared}>
             <FontAwesome5 name="share" size={20} color={colors.primaryLight} />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{padding: 10, marginTop: 20}}>
-        <View style={{flexDirection: 'row'}}>
-          <Image
-            source={{uri: `${detailBooks.cover_image}`}}
-            style={{width: 100, height: 150, borderRadius: 3, marginRight: 10}}
-            resizeMode="cover"
-          />
-          <View>
-            <Comfortaa
-              type="Bold"
-              size={20}
-              style={{width: wp('60%'), marginBottom: 5}}>
-              {detailBooks.title}
-            </Comfortaa>
-            <Comfortaa>Author : {detailBooks.author}</Comfortaa>
-            <Comfortaa>Publisher : {detailBooks.publisher}</Comfortaa>
-          </View>
+      <View style={styles.header}>
+        <Image
+          source={{uri: `${detailBooks.cover_image}`}}
+          style={styles.cover}
+          resizeMode="cover"
+        />
+        <View>
+          <Comfortaa type="Bold" size={20} style={styles.title}>
+            {detailBooks.title}
+          </Comfortaa>
+          <Comfortaa>Author : {detailBooks.author}</Comfortaa>
+          <Comfortaa>Publisher : {detailBooks.publisher}</Comfortaa>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 20,
-            backgroundColor: colors.primary,
-            padding: 20,
-            borderRadius: 5,
-          }}>
-          <View style={{alignItems: 'center'}}>
-            <Comfortaa type="Bold" style={{color: colors.primaryDark}}>
+        <View style={styles.card}>
+          <View style={styles.center}>
+            <Comfortaa type="Bold" style={styles.cardText}>
               Rating
             </Comfortaa>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                alignContent: 'center',
-              }}>
-              <Comfortaa
-                style={{
-                  color: colors.primaryDark,
-                  marginTop: -2,
-                  marginRight: 3,
-                }}>
+            <View style={styles.ratingContainer}>
+              <Comfortaa style={styles.ratingValue}>
                 {detailBooks.average_rating}
               </Comfortaa>
 
@@ -185,11 +127,11 @@ export default function Index({navigation, route}) {
               />
             </View>
           </View>
-          <View style={{alignItems: 'center'}}>
-            <Comfortaa type="Bold" style={{color: colors.primaryDark}}>
+          <View style={styles.center}>
+            <Comfortaa type="Bold" style={styles.cardText}>
               Total Sale
             </Comfortaa>
-            <Comfortaa style={{color: colors.primaryDark}}>
+            <Comfortaa style={styles.cardText}>
               {detailBooks.total_sale}
             </Comfortaa>
           </View>
@@ -201,14 +143,10 @@ export default function Index({navigation, route}) {
                   'This features will be added in next update',
                 )
               }
-              style={{
-                backgroundColor: colors.primaryDark,
-                padding: 7,
-                borderRadius: 5,
-              }}>
+              style={styles.price}>
               <Comfortaa>
                 Buy Rp.{' '}
-                <Comfortaa style={{letterSpacing: 1}}>
+                <Comfortaa style={styles.priceValue}>
                   {detailBooks.price ? toIDR(detailBooks.price) : ''}
                   ,-
                 </Comfortaa>
@@ -217,17 +155,14 @@ export default function Index({navigation, route}) {
           </View>
         </View>
         <View>
-          <Comfortaa
-            type="Bold"
-            size={20}
-            style={{marginBottom: 10, marginTop: 15}}>
+          <Comfortaa type="Bold" size={20} style={styles.overview}>
             Overview
           </Comfortaa>
-          <Comfortaa style={{textAlign: 'justify'}}>
+          <Comfortaa style={styles.overviewContainer}>
             {detailBooks.synopsis
-              ? detailBooks.synopsis.split(' ').map((word, i) => {
+              ? detailBooks.synopsis.split(' ').map(word => {
                   return (
-                    <Comfortaa style={{lineHeight: 25}}>{word} </Comfortaa>
+                    <Comfortaa style={styles.overviewText}>{word} </Comfortaa>
                   );
                 })
               : ''}
@@ -237,3 +172,100 @@ export default function Index({navigation, route}) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.primaryDark,
+    width: wp('100%'),
+    height: hp('100%'),
+    padding: 15,
+  },
+  content: {
+    marginTop: -15,
+    marginHorizontal: -15,
+    backgroundColor: colors.primary,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  button: {
+    borderRadius: 40,
+    width: 40,
+    height: 40,
+    padding: 10,
+    backgroundColor: colors.primaryDark,
+  },
+  title: {
+    width: wp('60%'),
+    marginBottom: 5,
+  },
+  image: {
+    borderRadius: 40,
+    width: 40,
+    height: 40,
+    padding: 10,
+    backgroundColor: colors.primaryDark,
+  },
+  buttonContainer: {flexDirection: 'row'},
+  loved: {
+    borderRadius: 40,
+    width: 40,
+    height: 40,
+    padding: 10,
+    backgroundColor: colors.primaryDark,
+    marginRight: 10,
+  },
+  shared: {
+    borderRadius: 40,
+    width: 40,
+    height: 40,
+    padding: 10,
+    backgroundColor: colors.primaryDark,
+  },
+  header: {
+    flexDirection: 'row',
+    padding: 10,
+    marginTop: 20,
+  },
+  cover: {
+    width: 100,
+    height: 150,
+    borderRadius: 3,
+    marginRight: 10,
+  },
+  card: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 20,
+    backgroundColor: colors.primary,
+    padding: 20,
+    borderRadius: 5,
+  },
+  center: {alignItems: 'center'},
+  cardText: {color: colors.primaryDark},
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  ratingValue: {
+    color: colors.primaryDark,
+    marginTop: -2,
+    marginRight: 3,
+  },
+  price: {
+    backgroundColor: colors.primaryDark,
+    padding: 7,
+    borderRadius: 5,
+  },
+  priceValue: {letterSpacing: 1},
+  overview: {
+    marginBottom: 10,
+    marginTop: 15,
+  },
+  overviewContainer: {textAlign: 'justify'},
+  overviewText: {lineHeight: 25},
+});

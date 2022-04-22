@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Alert,
   ScrollView,
 } from 'react-native';
 import {LogBox} from 'react-native';

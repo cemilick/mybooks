@@ -1,4 +1,11 @@
-import {View, FlatList, Image, TouchableOpacity, Alert} from 'react-native';
+import {
+  View,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+} from 'react-native';
 import React, {useEffect} from 'react';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -43,30 +50,60 @@ export default function Index({navigation}) {
     }
   };
 
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: colors.primaryDark,
+      width: wp('100%'),
+      height: hp('100%'),
+      padding: wp(5),
+    },
+    header: {
+      marginTop: -wp(5),
+      marginHorizontal: -wp(5),
+      backgroundColor: colors.primary,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: wp(7),
+      paddingVertical: wp(3),
+    },
+    logo: {
+      width: wp(35),
+      height: wp(12),
+      marginLeft: -wp(5),
+    },
+    logout: {
+      backgroundColor: colors.primaryDark,
+      padding: wp(2),
+      borderRadius: wp(2),
+    },
+    hello: {
+      marginTop: 10,
+      marginBottom: 20,
+    },
+    recommended: {marginBottom: 10},
+    popular: {
+      marginBottom: 10,
+      marginTop: -hp('20%'),
+    },
+    flex: {flex: 1},
+    image: {
+      width: wp('28%'),
+      height: hp('20%'),
+      marginRight: 15,
+      borderRadius: 5,
+    },
+    title: {width: wp('30%')},
+    title2: {
+      width: wp('30%'),
+      marginBottom: 15,
+    },
+  });
+
   return (
-    <View
-      style={{
-        backgroundColor: colors.primaryDark,
-        width: wp('100%'),
-        height: hp('100%'),
-        padding: wp(5),
-      }}>
-      <View
-        style={{
-          marginTop: -wp(5),
-          marginHorizontal: -wp(5),
-          backgroundColor: colors.primary,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: wp(7),
-          paddingVertical: wp(3),
-        }}>
-        <Image
-          source={logo}
-          style={{width: wp(35), height: wp(12), marginLeft: -wp(5)}}
-          resizeMode="cover"
-        />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image source={logo} style={styles.logo} resizeMode="cover" />
         <TouchableOpacity
           onPress={() => {
             dispatch(setToken(null));
@@ -77,22 +114,18 @@ export default function Index({navigation}) {
               },
             ]);
           }}
-          style={{
-            backgroundColor: colors.primaryDark,
-            padding: wp(2),
-            borderRadius: wp(2),
-          }}>
+          style={styles.logout}>
           <Comfortaa>Logout</Comfortaa>
         </TouchableOpacity>
       </View>
-      <Comfortaa size={16} style={{marginTop: 10, marginBottom: 20}}>
+      <Comfortaa size={16} style={styles.hello}>
         Hello {name}, Welcome Back!
       </Comfortaa>
-      <Comfortaa type="Bold" size={20} style={{marginBottom: 10}}>
+      <Comfortaa type="Bold" size={20} style={styles.recommended}>
         Recommended
       </Comfortaa>
       <FlatList
-        style={{flex: 1}}
+        style={styles.flex}
         horizontal={true}
         data={books}
         keyExtractor={(item, index) => index}
@@ -101,27 +134,19 @@ export default function Index({navigation}) {
             <TouchableOpacity onPress={() => isConnected(item.id)}>
               <Image
                 source={{uri: `${item.cover_image}`}}
-                style={{
-                  width: wp('28%'),
-                  height: hp('20%'),
-                  marginRight: 15,
-                  borderRadius: 5,
-                }}
+                style={styles.image}
                 resizeMode="cover"
               />
-              <Comfortaa style={{width: wp('30%')}}>{item.title}</Comfortaa>
+              <Comfortaa style={styles.title}>{item.title}</Comfortaa>
             </TouchableOpacity>
           );
         }}
       />
-      <Comfortaa
-        type="Bold"
-        size={20}
-        style={{marginBottom: 10, marginTop: -hp('20%')}}>
+      <Comfortaa type="Bold" size={20} style={styles.popular}>
         Popular
       </Comfortaa>
       <FlatList
-        style={{flex: 1}}
+        style={styles.flex}
         numColumns={3}
         data={books}
         keyExtractor={(item, index) => index}
@@ -130,17 +155,10 @@ export default function Index({navigation}) {
             <TouchableOpacity onPress={() => isConnected(item.id)}>
               <Image
                 source={{uri: `${item.cover_image}`}}
-                style={{
-                  width: wp('28%'),
-                  height: hp('20%'),
-                  marginRight: 15,
-                  borderRadius: 5,
-                }}
+                style={styles.image}
                 resizeMode="cover"
               />
-              <Comfortaa style={{width: wp('30%'), marginBottom: 15}}>
-                {item.title}
-              </Comfortaa>
+              <Comfortaa style={styles.title2}>{item.title}</Comfortaa>
             </TouchableOpacity>
           );
         }}

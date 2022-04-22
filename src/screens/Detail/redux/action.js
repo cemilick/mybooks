@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {BASE_URL} from '../../../helpers/apiAccess';
-import toIDR from '../../../helpers/toIDR';
 import {setLoading} from '../../../store/globalAction';
 
 export const getDetailBooks = (id, token) => async dispatch => {
